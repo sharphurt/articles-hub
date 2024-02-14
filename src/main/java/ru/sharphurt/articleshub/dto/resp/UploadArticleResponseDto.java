@@ -2,11 +2,14 @@ package ru.sharphurt.articleshub.dto.resp;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import ru.sharphurt.articleshub.dto.api.PayloadDto;
 
 @Data
 @Builder
-public class UploadArticleResponseDto {
+@EqualsAndHashCode(callSuper = true)
+public class UploadArticleResponseDto extends PayloadDto {
 
-    private String name;
     private String id;
+    private String name;
 }
