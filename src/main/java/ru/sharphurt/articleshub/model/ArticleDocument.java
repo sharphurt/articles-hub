@@ -1,7 +1,6 @@
 package ru.sharphurt.articleshub.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

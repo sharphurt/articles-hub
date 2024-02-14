@@ -2,18 +2,13 @@ package ru.sharphurt.articleshub.service.parsetext;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import ru.sharphurt.articleshub.model.NodeType;
-import ru.sharphurt.articleshub.service.parser.ParseDocumentService;
 import ru.sharphurt.articleshub.service.util.ParseUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.sharphurt.articleshub.sample.RegexpSample.*;
 
 public class RegexpTest {
-    @InjectMocks
-    public ParseDocumentService service;
-
     @Test
     @SneakyThrows
     public void normalStringNoIndent_success() {
