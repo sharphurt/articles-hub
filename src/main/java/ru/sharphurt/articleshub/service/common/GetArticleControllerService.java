@@ -13,10 +13,10 @@ import static ru.sharphurt.articleshub.mapper.ArticleDocumentMapper.ARTICLE_DOCU
 @RequiredArgsConstructor
 public class GetArticleControllerService {
 
-    private final FindArticleDatabaseService findArticleDatabaseService;
+    private final FindArticleDatabaseService service;
 
     public GetArticleResponseDto call(String id) {
-        var entity = findArticleDatabaseService.getArticleById(id);
+        var entity = service.getArticleById(id);
         return ARTICLE_DOCUMENT_MAPPER.entityToResponseDto(entity);
     }
 }

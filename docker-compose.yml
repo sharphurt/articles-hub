@@ -22,3 +22,11 @@ services:
       - "8181:8181"
     depends_on:
       - mongodb
+
+  frontend:
+    build: https://github.com/sharphurt/articles-hub-frontend.git
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
