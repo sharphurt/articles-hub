@@ -1,25 +1,23 @@
 package ru.sharphurt.articleshub.service.parser;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.LineIterator;
 import org.springframework.stereotype.Service;
-import ru.sharphurt.articleshub.model.Document;
 import ru.sharphurt.articleshub.model.Node;
 import ru.sharphurt.articleshub.model.NodeType;
 
-import javax.print.Doc;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static ru.sharphurt.articleshub.service.util.ParseUtil.getClearString;
+import static ru.sharphurt.articleshub.service.util.ParseUtil.getNodeTypeFromLine;
+
 @Slf4j
 @Service
-public class ParseTextService {
+public class ParseDocumentService {
 
     public List<String> convertBytesToLines(byte[] bytes) throws IOException {
         var lines = new ArrayList<String>();
@@ -33,29 +31,27 @@ public class ParseTextService {
         return lines;
     }
 
-    public Document parseLines(List<String> lines) {
+    public List<Node> parseLines(List<String> lines) {
         var stack = new Stack<Node>();
-        var prevIndent = 0;
+        var previousIndent = 0;
         var minIndent = Integer.MAX_VALUE;
 
         for (var i = 0; i < lines.size(); i++) {
             var line = lines.get(i);
-            var clearText = getClearString(line);
-            var nodeType = getNodeTypeFromString(line);
+            var content = getClearString(line);
+            var nodeType = getNodeTypeFromLine(line);
+            var node = Node.builder().lineNumber(i).content(content).type(nodeType).build();
 
-            if (nodeType.getIndent() >= prevIndent) {
-                var node = new Node(i, clearText, nodeType);
+            if (nodeType.getIndent() >= previousIndent) {
                 stack.push(node);
             }
 
-            if (nodeType == NodeType.TEXT && nodeType.getIndent() < prevIndent) {
-                var node = new Node(i, clearText, NodeType.TEXT);
+            if (nodeType == NodeType.TEXT && nodeType.getIndent() < previousIndent) {
                 stack.peek().addChild(node);
             }
 
-            if (nodeType != NodeType.TEXT && nodeType.getIndent() < prevIndent) {
+            if (nodeType != NodeType.TEXT && nodeType.getIndent() < previousIndent) {
                 collapseChildrenToLevel(stack, nodeType.getIndent());
-                var node = new Node(i, clearText, nodeType);
                 stack.push(node);
             }
 
@@ -63,11 +59,11 @@ public class ParseTextService {
                 minIndent = nodeType.getIndent();
             }
 
-            prevIndent = stack.peek().getType().getIndent();
+            previousIndent = stack.peek().getType().getIndent();
         }
 
         collapseChildrenToLevel(stack, minIndent);
-        return new Document(lines, stack.stream().toList());
+        return stack.stream().toList();
     }
 
     private void collapseChildrenToLevel(Stack<Node> stack, Integer level) {
@@ -87,14 +83,4 @@ public class ParseTextService {
 
         stack.peek().addChildren(children.reversed());
     }
-
-    private NodeType getNodeTypeFromString(String string) {
-        var prefix = string.replaceAll("^(#{0,6})(.*)$", "$1");
-        return NodeType.typePrefixes.get(prefix);
-    }
-
-    private String getClearString(String string) {
-        return string.replaceAll("^(#{0,6})(.*)$", "$2");
-    }
-
 }

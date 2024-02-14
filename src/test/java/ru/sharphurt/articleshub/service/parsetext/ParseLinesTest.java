@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.sharphurt.articleshub.model.Document;
-import ru.sharphurt.articleshub.service.parser.ParseTextService;
+import ru.sharphurt.articleshub.service.parser.ParseDocumentService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.sharphurt.articleshub.sample.ParseDocumentSample.*;
@@ -15,27 +14,27 @@ import static ru.sharphurt.articleshub.sample.ParseDocumentSample.*;
 public class ParseLinesTest {
 
     @InjectMocks
-    public ParseTextService service;
+    public ParseDocumentService service;
 
     @Test
     @SneakyThrows
     public void parseNormalDocument_success() {
         var document = service.parseLines(normalDocument);
-        assertEquals(new Document(normalDocument, normalDocumentExpected), document);
+        assertEquals(normalDocumentExpected, document);
     }
 
     @Test
     @SneakyThrows
     public void parseBigIndentDocument_success() {
         var document = service.parseLines(bigIndentDocument);
-        assertEquals(new Document(bigIndentDocument, bigIndentDocumentExpected), document);
+        assertEquals(bigIndentDocumentExpected, document);
     }
 
     @Test
     @SneakyThrows
     public void parseFullSimpleTextDocument_success() {
         var document = service.parseLines(fullSimpleTextDocument);
-        assertEquals(new Document(fullSimpleTextDocument, fullSimpleTextDocumentExpected), document);
+        assertEquals(fullSimpleTextDocumentExpected, document);
     }
 
 
@@ -43,7 +42,7 @@ public class ParseLinesTest {
     @SneakyThrows
     public void parseNotFirstLevelIndentDocument_success() {
         var document = service.parseLines(notFirstLevelIndentDocument);
-        assertEquals(new Document(notFirstLevelIndentDocument, notFirstLevelIndentExpected), document);
+        assertEquals(notFirstLevelIndentExpected, document);
     }
 
 }
