@@ -45,4 +45,11 @@ public class ParseLinesTest {
         assertEquals(notFirstLevelIndentExpected, document);
     }
 
+    @Test
+    @SneakyThrows
+    public void parseWithEmptyLinesDocument_success() {
+        var document = service.parseLines(withEmptyLinesDocument);
+        assertEquals(withEmptyLinesDocumentExpected, document);
+    }
+
 }
