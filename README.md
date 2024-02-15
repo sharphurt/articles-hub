@@ -126,11 +126,12 @@ his fame was greater than his popularity
 </details>
 
 ### Запуск
-Проект включает в себя серверное приложение, базу данных и фронтенд. Запустить их вместе можно с помощью docker-compose. Файл `docker-compose.yml` находится в корне проекта. [Как использовать docker-compose](https://docs.docker.com/compose/gettingstarted/#step-4-build-and-run-your-app-with-compose)
+Проект включает в себя серверное приложение, базу данных и фронтенд. Запустить их вместе можно с помощью docker-compose. Файл `docker-compose.yml` находится в корне проекта. [Как использовать docker-compose.](https://docs.docker.com/compose/gettingstarted/#step-4-build-and-run-your-app-with-compose)
 
-* URL приложения по умолчанию: [localhost:8181](localhost:8181)
-* URL базы данных по умолчанию: [localhost:27017](localhost:27017)
-* URL фронденда по умолчанию: [localhost:3000](localhost:3000)
+Веб-приложение для загрузки, чтения и удаления статей представлено в репозитории [sharphurt/articles-hub-frontend](https://github.com/sharphurt/articles-hub-frontend).
+* Серверное приложение: [localhost:8181](localhost:8181)
+* База данных: [localhost:27017](localhost:27017)
+* Веб-интерфейс: [localhost:3000](localhost:3000)
 
 ### Использованные технологии
 * Spring Framework 6.1.3
