@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ArticleNotFoundException.class)
     public ControllerErrorResponse notFoundException(ArticleNotFoundException e) {
-        return ControllerErrorResponse.of(e, HttpStatus.BAD_REQUEST);
+        return ControllerErrorResponse.of(e, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ArticleAlreadyExists.class)
