@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.sharphurt.articleshub.service.parser.ParseTextService;
+import ru.sharphurt.articleshub.service.parser.ParseDocumentService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.sharphurt.articleshub.sample.LineSeparatorsSample.*;
@@ -14,7 +14,7 @@ import static ru.sharphurt.articleshub.sample.LineSeparatorsSample.*;
 public class LineSeparatorTest {
 
     @InjectMocks
-    public ParseTextService service;
+    public ParseDocumentService service;
 
     @Test
     @SneakyThrows

@@ -1,16 +1,33 @@
 version: '3.8'
 services:
-  db:
-    image: mysql:8.3.0
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
     environment:
-      MYSQL_USER: sharphurt
-      MYSQL_PASSWORD: password
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
-    command: --init-file /data/application/init.sql
+      MONGO_INITDB_ROOT_USERNAME: sharphurt
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: articles-hub-prod
     ports:
-      - "33061:3306"
+      - "27017:27017"
     volumes:
-      - ./src/main/resources/db/init.sql:/data/application/init.sql
-      - ./dbdata:/var/lib/mysql
-      - ./conf-mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-    restart: unless-stopped
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongodbdata:/data/db
+
+  application:
+    image: application:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: https://github.com/sharphurt/articles-hub-frontend.git
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
