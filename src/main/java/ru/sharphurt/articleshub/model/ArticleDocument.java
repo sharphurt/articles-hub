@@ -1,6 +1,5 @@
 package ru.sharphurt.articleshub.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,14 +15,7 @@ public class ArticleDocument {
 
     @Id
     private String id;
-
     private String name;
-
     private Date creationDate;
-
-    @JsonIgnore
-    //todo: посмотреть, нужно ли
-    private List<String> rawText;
-
     private List<Node> nodes;
 }

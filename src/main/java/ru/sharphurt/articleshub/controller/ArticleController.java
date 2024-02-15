@@ -1,10 +1,9 @@
 package ru.sharphurt.articleshub.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.sharphurt.articleshub.dto.api.ApiResponse;
+import ru.sharphurt.articleshub.dto.api.ControllerSuccessResponse;
 import ru.sharphurt.articleshub.dto.resp.DeleteArticleResponseDto;
 import ru.sharphurt.articleshub.dto.resp.GetArticleResponseDto;
 import ru.sharphurt.articleshub.dto.resp.GetArticlesListResponseDto;
@@ -25,22 +24,22 @@ public class ArticleController {
     private final DeleteArticleControllerService deleteArticlesListService;
 
     @PostMapping("/upload")
-    public ResponseEntity<ApiResponse<UploadArticleResponseDto>> uploadArticle(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(ApiResponse.onSuccess(uploadArticleService.call(file)));
+    public ControllerSuccessResponse<UploadArticleResponseDto> uploadArticle(@RequestParam("file") MultipartFile file) {
+        return ControllerSuccessResponse.of(uploadArticleService.call(file));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<GetArticleResponseDto>> getArticle(@PathVariable("id") String id) {
-        return ResponseEntity.ok(ApiResponse.onSuccess(getArticleService.call(id)));
+    public ControllerSuccessResponse<GetArticleResponseDto> getArticle(@PathVariable("id") String id) {
+        return ControllerSuccessResponse.of(getArticleService.call(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<ApiResponse<GetArticlesListResponseDto>> getArticlesList() {
-        return ResponseEntity.ok(ApiResponse.onSuccess(getArticlesListService.call()));
+    public ControllerSuccessResponse<GetArticlesListResponseDto> getArticlesList() {
+        return ControllerSuccessResponse.of(getArticlesListService.call());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<DeleteArticleResponseDto>> deleteArticle(@PathVariable("id") String id) {
-        return ResponseEntity.ok(ApiResponse.onSuccess(deleteArticlesListService.call(id)));
+    public ControllerSuccessResponse<DeleteArticleResponseDto> deleteArticle(@PathVariable("id") String id) {
+        return ControllerSuccessResponse.of(deleteArticlesListService.call(id));
     }
 }

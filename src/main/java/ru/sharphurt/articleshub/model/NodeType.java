@@ -6,7 +6,6 @@ import java.util.Map;
 
 @Getter
 public enum NodeType {
-    ROOT(-1, "-root-"),
     TEXT(0, "text"),
     H1(1, "h1"),
     H2(2, "h2"),

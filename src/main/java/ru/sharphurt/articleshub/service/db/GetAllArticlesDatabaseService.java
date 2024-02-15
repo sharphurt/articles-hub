@@ -8,6 +8,8 @@ import ru.sharphurt.articleshub.repository.ArticleRepository;
 
 import java.util.List;
 
+import static ru.sharphurt.articleshub.constants.AliasConstants.LOG_GET_ALL_ARTICLES;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -18,6 +20,9 @@ public class GetAllArticlesDatabaseService {
     private final String serviceName = "get-all-articles-database-service";
 
     public List<ArticleDocument> getAllArticles() {
-        return repository.findAll();
+        var articles = repository.findAll();
+        log.info(LOG_GET_ALL_ARTICLES.formatted(articles.size()));
+
+        return articles;
     }
 }

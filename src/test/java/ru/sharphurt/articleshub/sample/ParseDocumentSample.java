@@ -6,6 +6,7 @@ import ru.sharphurt.articleshub.model.NodeType;
 import java.util.List;
 
 public class ParseDocumentSample {
+
     public static List<String> normalDocument = List.of(
             "GREATEST MAN IN ALIVE",
             "#Chapter one",
