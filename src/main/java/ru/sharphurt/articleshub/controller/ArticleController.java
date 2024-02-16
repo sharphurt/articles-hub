@@ -8,20 +8,20 @@ import ru.sharphurt.articleshub.dto.resp.DeleteArticleResponseDto;
 import ru.sharphurt.articleshub.dto.resp.GetArticleResponseDto;
 import ru.sharphurt.articleshub.dto.resp.GetArticlesListResponseDto;
 import ru.sharphurt.articleshub.dto.resp.UploadArticleResponseDto;
-import ru.sharphurt.articleshub.service.common.DeleteArticleControllerService;
-import ru.sharphurt.articleshub.service.common.GetArticleControllerService;
-import ru.sharphurt.articleshub.service.common.GetArticlesListControllerService;
-import ru.sharphurt.articleshub.service.common.UploadArticleControllerService;
+import ru.sharphurt.articleshub.service.common.impl.DeleteArticleControllerServiceImpl;
+import ru.sharphurt.articleshub.service.common.impl.GetArticleControllerServiceImpl;
+import ru.sharphurt.articleshub.service.common.impl.GetArticlesListControllerServiceImpl;
+import ru.sharphurt.articleshub.service.common.impl.UploadArticleControllerServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class ArticleController {
 
-    private final UploadArticleControllerService uploadArticleService;
-    private final GetArticleControllerService getArticleService;
-    private final GetArticlesListControllerService getArticlesListService;
-    private final DeleteArticleControllerService deleteArticlesListService;
+    private final UploadArticleControllerServiceImpl uploadArticleService;
+    private final GetArticleControllerServiceImpl getArticleService;
+    private final GetArticlesListControllerServiceImpl getArticlesListService;
+    private final DeleteArticleControllerServiceImpl deleteArticlesListService;
 
     @PostMapping("/upload")
     public ControllerSuccessResponse<UploadArticleResponseDto> uploadArticle(@RequestParam("file") MultipartFile file) {
