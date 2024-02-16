@@ -6,8 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import ru.sharphurt.articleshub.dto.GetArticleResponseStructureDto;
-import ru.sharphurt.articleshub.dto.UploadArticleResponseStructureDto;
+import ru.sharphurt.articleshub.dto.api.ControllerResponse;
+import ru.sharphurt.articleshub.dto.resp.GetArticleResponseDto;
+import ru.sharphurt.articleshub.dto.resp.UploadArticleResponseDto;
 import ru.sharphurt.articleshub.repository.ArticleRepository;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -128,4 +129,12 @@ public class ArticleControllerTest extends BaseSpringContextTest {
                 .andExpect(jsonPath("successful").value("true"))
                 .andExpect(jsonPath("result.success").value("true"));
     }
+
+    private static final class UploadArticleResponseStructureDto extends ControllerResponse<UploadArticleResponseDto> {
+    }
+
+
+    private static final class GetArticleResponseStructureDto extends ControllerResponse<GetArticleResponseDto> {
+    }
 }
+

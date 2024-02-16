@@ -24,4 +24,15 @@ public class GlobalExceptionHandler {
     public ControllerErrorResponse conflictException(ArticleAlreadyExists e) {
         return ControllerErrorResponse.of(e, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(BaseException.class)
+    public ControllerErrorResponse internalServerErrorHandler(BaseException e) {
+        return ControllerErrorResponse.of(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ControllerErrorResponse unknownException(RuntimeException e) {
+        log.error(e.getMessage(), e);
+        return ControllerErrorResponse.of(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

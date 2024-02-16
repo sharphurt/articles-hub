@@ -141,6 +141,21 @@ his fame was greater than his popularity
 * База данных: [localhost:27017](http://localhost:27017)
 * Веб-интерфейс: [localhost:3000](http://localhost:3000)
 
+### API
+
+Описание API доступно в [Swagger.](http://localhost:8181/swagger-ui/index.html)
+Все ответы сервиса имеют следующую структуру:
+```
+{
+    "successful": true / false,         // успешность запроса
+    "result": {},                       // объект, полученный в результате успешного запроса
+    "error": "string"                   // строка ошибки  
+}
+```
+
+В случае, когда запрос успешен (`successful = true`), поле `error` не включается в ответ.  
+В случае ошибки (`successful = false`), в ответ не включается поле `result`
+
 ### Использованные технологии
 
 * Spring Framework 6.1.3
