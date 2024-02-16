@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.sharphurt.articleshub.service.parser.ParseDocumentService;
+import ru.sharphurt.articleshub.service.parser.impl.ParseDocumentServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.sharphurt.articleshub.sample.LineSeparatorsSample.*;
@@ -14,33 +14,33 @@ import static ru.sharphurt.articleshub.sample.LineSeparatorsSample.*;
 public class LineSeparatorTest {
 
     @InjectMocks
-    public ParseDocumentService service;
+    public ParseDocumentServiceImpl service;
 
     @Test
     @SneakyThrows
     public void parseCRLFLines_success() {
-        var lines = service.convertBytesToLines(crlfContent.getBytes());
+        var lines = service.convertToLines(crlfContent.getBytes(), "test");
         assertEquals(linesContent, lines);
     }
 
     @Test
     @SneakyThrows
     public void parseCRLines_success() {
-        var lines = service.convertBytesToLines(crContent.getBytes());
+        var lines = service.convertToLines(crContent.getBytes(), "test");
         assertEquals(linesContent, lines);
     }
 
     @Test
     @SneakyThrows
     public void parseLNLines_success() {
-        var lines = service.convertBytesToLines(lnContent.getBytes());
+        var lines = service.convertToLines(lnContent.getBytes(), "test");
         assertEquals(linesContent, lines);
     }
 
     @Test
     @SneakyThrows
     public void parseMixedLines_success() {
-        var lines = service.convertBytesToLines(mixedContent.getBytes());
+        var lines = service.convertToLines(mixedContent.getBytes(), "test");
         assertEquals(linesContent, lines);
     }
 }
