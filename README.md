@@ -19,7 +19,10 @@
 Возможно 6 уровней вложенности заголовка. Если строка имеет префикс длиннее, чем префикс заголовка 6 (последнего)
 уровня, то строка считается таким заголовком, и её текстовое представление включит в себя лишние символы `#`
 
-Пример входного текста:
+Примеры файлов лежат в папке `.\examples`.
+
+<details>
+  <summary>Пример входного текста</summary>
 
 ```
 GREATEST MAN IN ALIVE
@@ -36,6 +39,7 @@ his fame was greater than his popularity
 ###x-ray  
 ###internal combustion engine
 ```
+</details>
 
 <details>
   <summary>Пример разобранной структуры</summary>
@@ -131,8 +135,7 @@ his fame was greater than his popularity
 ### Запуск
 
 Проект включает в себя серверное приложение, базу данных и фронтенд. Запустить их вместе можно с помощью docker-compose.
-Файл `docker-compose.yml` находится в корне
-проекта. [Как использовать docker-compose.](https://docs.docker.com/compose/gettingstarted/#step-4-build-and-run-your-app-with-compose)
+Файл `docker-compose.yml` находится в корне проекта. [Как использовать docker-compose.](https://docs.docker.com/compose/gettingstarted/#step-4-build-and-run-your-app-with-compose)
 
 Веб-приложение для загрузки, чтения и удаления статей представлено в
 репозитории [sharphurt/articles-hub-frontend](https://github.com/sharphurt/articles-hub-frontend).
